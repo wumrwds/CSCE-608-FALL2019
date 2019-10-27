@@ -1,0 +1,51 @@
+[
+    {
+        "title": "Dashboard",
+        "iconClass": "xxx",
+        "href": "/overview"
+    },
+    {
+        "title": "Users",
+        "iconClass": "xxx",
+        "href": "/",
+        "children": [
+            {
+               "title": "User List",
+                "href": "/jobs"
+            }
+        ]
+    },
+    {
+        "title": "Articles",
+        "iconClass": "xxx",
+        "href": "/",
+        "children": [
+            {
+               "title": "Article List",
+                "href": "/tasks"
+            }
+        ]
+    },
+    {
+        "title": "Categories",
+        "iconClass": "xxx",
+        "href": "/",
+        "children": [
+            {
+               "title": "Category List",
+                "href": "/jobs"
+            }
+        ]
+    },
+    {
+        "title": "Comments",
+        "iconClass": "xxx",
+        "href": "/",
+        "children": [
+            {
+               "title": "Comments List",
+                "href": "/jobs"
+            }
+        ]
+    }
+]
