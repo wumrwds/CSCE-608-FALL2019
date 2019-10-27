@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.tamu.wumrwds.database.mapper.PersonMapper">
+    <resultMap type="edu.tamu.wumrwds.database.entity.Person" id="person">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="create_datetime" jdbcType="VARCHAR" property="createTime"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="zone" jdbcType="VARCHAR" property="zone"/>
+    </resultMap>
+
+    <sql id="personColnum">
+       id,create_datetime,email,phone,sex,username,zone
+    </sql>
+
+    <select id="findAll" resultMap="person">
+        SELECT <include refid="personColnum"/>
+        FROM persons
+    </select>
+
+</mapper>
