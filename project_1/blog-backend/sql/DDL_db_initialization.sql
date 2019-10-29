@@ -6,11 +6,21 @@ CREATE TABLE `csce_608_1`.`tt_user` (
   `email` VARCHAR(256) NOT NULL,
   `description` VARCHAR(300) NULL,
   `avatar` VARCHAR(300) NULL,
+  `role_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `uk_username` (`username` ASC),
   UNIQUE INDEX `uk_email` (`email` ASC))
 DEFAULT CHARACTER SET = utf8
 COMMENT = 'User Table';
+
+-- Role
+CREATE TABLE `csce_608_1`.`tt_role` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(80) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `uk_name` (`name` ASC))
+DEFAULT CHARACTER SET = utf8
+COMMENT = 'Role Table';
 
 -- Article
 CREATE TABLE `csce_608_1`.`tt_article` (
@@ -43,7 +53,7 @@ CREATE TABLE `csce_608_1`.`tt_category` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
+  UNIQUE INDEX `uk_name` (`name` ASC))
 DEFAULT CHARACTER SET = utf8
 COMMENT = 'Category Table';
 
