@@ -8,6 +8,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * User: query
+ *
+ * Article: query(Join username & category name)
+ *
+ * Article Detail: query/add(rich text)
+ *
+ * Comment: count comments for each article (group by & count)
+ *          delete the articles with the least comments (delete & subquery)
+ *
+ * Category: count articles for each category (group by and aggregate)
+ *
+ *
+ */
 @Service
 public class PersonServiceImpl implements PersonService {
     @Autowired

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- execute generator： call mvn mybatis-generator:generate -e -->
+    <properties resource="mybatis/generator/generator-config.properties"/>
+
+    <context id="MysqlTables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="autoDelimitKeywords" value="true" />
+        <property name="javaFileEncoding" value="utf-8" />
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <commentGenerator >
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+
+        <!-- jdbc connection -->
+        <jdbcConnection driverClass="${jdbc_driver}" connectionURL="${jdbc_url}" userId="${jdbc_user}" password="${jdbc_password}" />
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- java files location -->
+        <javaModelGenerator targetPackage="edu.tamu.wumrwds.database.entity" targetProject="${project}" >
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- mapper files location -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="${resources}" >
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="edu.tamu.wumrwds.database.mapper" targetProject="${project}" type="XMLMAPPER" >
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <!-- tables -->
+        <table tableName="tt_%"
+               enableInsert="false"
+               enableDeleteByPrimaryKey="false"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="false"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <domainObjectRenamingRule searchString="^Tt" replaceString=""/>
+        </table>
+    </context>
+</generatorConfiguration>
