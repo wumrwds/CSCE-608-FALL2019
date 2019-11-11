@@ -35,13 +35,14 @@
     
     
     <select id="selectUsers" resultMap="BaseResultMap">
-        select t1.id, username, nickname, email, description, avatar, t2.name
+        select t1.id, username, nickname, email, description, avatar, t2.name as role_name
         from tt_user t1
         LEFT OUTER JOIN tt_role t2
         ON t1.role_id = t2.id
         <where>
             <if test="username != null and username != ''">
-                and t1.username = #{username}
+                <bind name="username" value="'%' + username + '%'" />
+                and t1.username like #{username}
             </if>
             <if test="roleId != null">
                 and t1.role_id = #{roleId}

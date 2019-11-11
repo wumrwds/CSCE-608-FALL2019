@@ -27,3 +27,6 @@ pagehelper:
     support-methods-arguments: true
     #如果 pageSize=0 就会查询出全部的结果（相当于没有执行分页查询）
     page-size-zero: true
+
+project:
+    version: V1.0
