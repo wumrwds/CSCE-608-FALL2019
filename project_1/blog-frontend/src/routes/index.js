@@ -9,14 +9,19 @@ const ErrorLogs = () => import(/* webpackChunkName: "index" */ '../components/co
 const Tasks = () => import(/* webpackChunkName: "index" */ '../components/common/Tasks.vue')
 const Jobs = () => import(/* webpackChunkName: "index" */ '../components/common/Jobs.vue')
 
+const User = () => import(/* webpackChunkName: "index" */ '../components/common/User.vue')
+const Article = () => import(/* webpackChunkName: "index" */ '../components/common/Article.vue')
+const Comment = () => import(/* webpackChunkName: "index" */ '../components/common/Comment.vue')
+const Category = () => import(/* webpackChunkName: "index" */ '../components/common/Category.vue')
+
 const routes = [
     {
         path: '/index',
-        name: 'index',
+        name: 'index'
         // component: Jobs
-        redirect: {
-            name: 'jobs'
-        }
+        // redirect: {
+        //     name: 'jobs'
+        // }
     },
     {
         path: '/',
@@ -43,6 +48,26 @@ const routes = [
         path: '/jobs',
         name: "jobs",
         component: Jobs
+    },
+    {
+        path: '/user',
+        name: "user",
+        component: User
+    },
+    {
+        path: '/article',
+        name: "article",
+        component: Article
+    },
+    {
+        path: '/comment',
+        name: "comment",
+        component: Comment
+    },
+    {
+        path: '/category',
+        name: "category",
+        component: Category
     }
 ]
 

@@ -5,46 +5,46 @@
         "href": "/overview"
     },
     {
-        "title": "Users",
+        "title": "User",
         "iconClass": "xxx",
         "href": "/",
         "children": [
             {
                "title": "User List",
-                "href": "/jobs"
+                "href": "/user"
             }
         ]
     },
     {
-        "title": "Articles",
+        "title": "Article",
         "iconClass": "xxx",
         "href": "/",
         "children": [
             {
                "title": "Article List",
-                "href": "/tasks"
+                "href": "/article"
             }
         ]
     },
     {
-        "title": "Categories",
+        "title": "Category",
         "iconClass": "xxx",
         "href": "/",
         "children": [
             {
                "title": "Category List",
-                "href": "/jobs"
+                "href": "/category"
             }
         ]
     },
     {
-        "title": "Comments",
+        "title": "Comment",
         "iconClass": "xxx",
         "href": "/",
         "children": [
             {
-               "title": "Comments List",
-                "href": "/jobs"
+               "title": "Comment List",
+                "href": "/comment"
             }
         ]
     }
