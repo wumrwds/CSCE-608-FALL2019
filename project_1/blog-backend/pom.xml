@@ -21,6 +21,9 @@
         <mybatis-generator.version>1.3.7</mybatis-generator.version>
         <pagehelper-spring-boot.version>1.2.12</pagehelper-spring-boot.version>
         <spring-mybatis.version>2.1.1</spring-mybatis.version>
+        <swagger.version>2.9.2</swagger.version>
+        <swagger-annotations.version>1.5.21</swagger-annotations.version>
+        <swagger-models.version>1.5.21</swagger-models.version>
     </properties>
 
     <dependencies>
@@ -73,6 +76,28 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper-spring-boot.version}</version>
+        </dependency>
+
+        <!-- Swagger -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-annotations.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>${swagger-models.version}</version>
         </dependency>
 
     </dependencies>
