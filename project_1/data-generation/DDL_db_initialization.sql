@@ -25,7 +25,7 @@ COMMENT = 'Role Table';
 -- Article
 CREATE TABLE `csce_608_1`.`tt_article` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NOT NULL,
+  `user_id` INT NOT NULL,
   `title` VARCHAR(100) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
   `body` BLOB NOT NULL,
