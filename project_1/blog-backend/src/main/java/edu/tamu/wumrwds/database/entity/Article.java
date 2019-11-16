@@ -1,5 +1,7 @@
 package edu.tamu.wumrwds.database.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -47,6 +49,7 @@ public class Article implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createdTime;
 
     /**
@@ -56,6 +59,7 @@ public class Article implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updatedTime;
 
     /**

@@ -1,6 +1,7 @@
 package edu.tamu.wumrwds.database.mapper;
 
 import edu.tamu.wumrwds.database.entity.Article;
+import edu.tamu.wumrwds.database.entity.ext.ArticleExt;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -22,4 +23,7 @@ public interface ArticleMapper {
      * @mbg.generated
      */
     List<Article> selectAll();
+
+
+    List<ArticleExt> selectArticles(String username, Integer categoryId);
 }
