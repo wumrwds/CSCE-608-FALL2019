@@ -33,7 +33,7 @@
         from tt_user
     </select>
     
-    
+
     <select id="selectUsers" resultMap="BaseResultMap">
         select t1.id, username, nickname, email, description, avatar, t2.name as role_name
         from tt_user t1

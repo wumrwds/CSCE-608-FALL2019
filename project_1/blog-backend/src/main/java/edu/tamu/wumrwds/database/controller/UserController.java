@@ -40,7 +40,7 @@ public class UserController {
             @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
     })
     public Result<PageInfo<? extends User>> getUsers(@RequestParam(name = "username", required = false) String username,
-                                                        @RequestParam(name = "roleId", required = false) Integer roleId) {
+                                                        @RequestParam(name = "role_id", required = false) Integer roleId) {
 
         try {
             PageInfo<UserExt> users = service.selectUsers(username, roleId);
