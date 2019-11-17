@@ -61,6 +61,7 @@
             </if>
         </where>
         group by t1.id
+        order by t1.updated_time desc
     </select>
 
     <insert id="insert" parameterType="edu.tamu.wumrwds.database.entity.Article" useGeneratedKeys="true" keyProperty="id" keyColumn="id">

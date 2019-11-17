@@ -56,6 +56,7 @@
                 and t1.article_id = #{articleId}
             </if>
         </where>
+        order by t1.created_time desc
     </select>
 
     <select id="selectCountByArticle" resultMap="CountResultMap">
@@ -69,5 +70,6 @@
             </if>
         </where>
         group by t1.article_id
+        order by count desc
     </select>
 </mapper>
