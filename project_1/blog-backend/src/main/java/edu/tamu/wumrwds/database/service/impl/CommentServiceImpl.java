@@ -2,6 +2,7 @@ package edu.tamu.wumrwds.database.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import edu.tamu.wumrwds.database.entity.dto.CommentDTO;
 import edu.tamu.wumrwds.database.entity.ext.CommentExt;
 import edu.tamu.wumrwds.database.mapper.CommentMapper;
 import edu.tamu.wumrwds.database.service.CommentService;
@@ -28,5 +29,15 @@ public class CommentServiceImpl implements CommentService {
         List<CommentExt> comments = mapper.selectComments(username, articleId);
 
         return new PageInfo<>(comments);
+    }
+
+    @Override
+    public PageInfo<CommentDTO> selectCountByArticle(Long articleId) {
+
+        PageHelper.startPage(1, 10);
+
+        List<CommentDTO> counts = mapper.selectCountByArticle(articleId);
+
+        return new PageInfo<>(counts);
     }
 }

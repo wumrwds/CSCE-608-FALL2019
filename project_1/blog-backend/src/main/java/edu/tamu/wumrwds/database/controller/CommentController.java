@@ -3,6 +3,7 @@ package edu.tamu.wumrwds.database.controller;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.pagehelper.PageInfo;
 import edu.tamu.wumrwds.database.entity.Comment;
+import edu.tamu.wumrwds.database.entity.dto.CommentDTO;
 import edu.tamu.wumrwds.database.entity.ext.CommentExt;
 import edu.tamu.wumrwds.database.entity.vo.Result;
 import edu.tamu.wumrwds.database.service.CommentService;
@@ -47,6 +48,26 @@ public class CommentController {
             PageInfo<CommentExt> comments = service.selectComments(username, articleId);
 
             return Result.buildOkResponse(comments, version);
+        } catch (Exception e) {
+            logger.error("*** Unexpected Exception: e = {} ***", e);
+
+            return Result.buildErrorResponse("500", e.getMessage(), version);
+        }
+    }
+
+    @GetMapping(value = "/count", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ApiOperation(value = "Count comments by the specific keyword")
+    @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
+            @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
+    })
+    public Result<PageInfo<CommentDTO>> getCount(@RequestParam(name = "article_id", required = false)
+                                                        @ApiParam(value = "Article ID") Long articleId) {
+
+        try {
+            PageInfo<CommentDTO> count = service.selectCountByArticle(articleId);
+
+            return Result.buildOkResponse(count, version);
         } catch (Exception e) {
             logger.error("*** Unexpected Exception: e = {} ***", e);
 

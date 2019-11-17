@@ -1,6 +1,7 @@
 package edu.tamu.wumrwds.database.mapper;
 
 import edu.tamu.wumrwds.database.entity.Comment;
+import edu.tamu.wumrwds.database.entity.dto.CommentDTO;
 import edu.tamu.wumrwds.database.entity.ext.CommentExt;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,4 +26,6 @@ public interface CommentMapper {
     List<Comment> selectAll();
 
     List<CommentExt> selectComments(String username, Long articleId);
+
+    List<CommentDTO> selectCountByArticle(Long articleId);
 }
