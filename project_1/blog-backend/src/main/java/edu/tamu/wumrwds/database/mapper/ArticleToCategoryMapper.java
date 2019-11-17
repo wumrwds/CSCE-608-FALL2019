@@ -22,4 +22,12 @@ public interface ArticleToCategoryMapper {
      * @mbg.generated
      */
     List<ArticleToCategory> selectAll();
+
+    /**
+     * Inserts multiple tuples.
+     *
+     * @param links
+     * @return
+     */
+    int insertAll(List<ArticleToCategory> links);
 }

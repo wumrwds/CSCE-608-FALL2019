@@ -1,7 +1,9 @@
 package edu.tamu.wumrwds.database.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.tamu.wumrwds.database.serializer.ByteArrayDeserializer;
 import edu.tamu.wumrwds.database.serializer.ByteArraySerializer;
 
 import java.io.Serializable;
@@ -72,6 +74,7 @@ public class Article implements Serializable {
      * @mbg.generated
      */
     @JsonSerialize(using = ByteArraySerializer.class)
+    @JsonDeserialize(using = ByteArrayDeserializer.class)
     private byte[] body;
 
     /**

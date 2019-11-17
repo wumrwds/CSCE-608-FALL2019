@@ -27,4 +27,12 @@
     select id, article_id, category_id
     from tt_article_to_category
   </select>
+
+    <insert id="insertAll" parameterType="java.util.List">
+        insert into tt_article_to_category (article_id, category_id)
+        values
+        <foreach collection="list" item="element" index="index" open="(" separator="),("  close=")">
+            #{element.articleId, jdbcType=BIGINT},#{element.categoryId, jdbcType=INTEGER}
+        </foreach>
+    </insert>
 </mapper>

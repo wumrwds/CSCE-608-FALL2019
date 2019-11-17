@@ -25,5 +25,20 @@ public interface ArticleMapper {
     List<Article> selectAll();
 
 
+    /**
+     * Selects articles by given conditions.
+     *
+     * @param username
+     * @param categoryId
+     * @return
+     */
     List<ArticleExt> selectArticles(String username, Integer categoryId);
+
+    /**
+     * Inserts a given record.
+     *
+     * @param record
+     * @return
+     */
+    int insert(Article record);
 }

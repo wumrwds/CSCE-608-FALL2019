@@ -6,10 +6,7 @@ import edu.tamu.wumrwds.database.entity.Article;
 import edu.tamu.wumrwds.database.entity.ext.ArticleExt;
 import edu.tamu.wumrwds.database.entity.vo.Result;
 import edu.tamu.wumrwds.database.service.ArticleService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +31,16 @@ public class ArticleController {
     @Value("${project.version}")
     private String version;
 
-    @GetMapping(value = "/articles", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/article", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ApiOperation(value = "Retrieves articles by querying with specific keywords")
     @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
             @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
     })
-    public Result<PageInfo<? extends Article>> getUsers(@RequestParam(name = "username", required = false) String username,
-                                                        @RequestParam(name = "category_id", required = false) Integer categoryId) {
+    public Result<PageInfo<? extends Article>> getArticle(@RequestParam(name = "username", required = false)
+                                                              @ApiParam(value = "User name") String username,
+                                                        @RequestParam(name = "category_id", required = false)
+                                                        @ApiParam(value = "category ID") Integer categoryId) {
 
         try {
             PageInfo<ArticleExt> articles = service.selectArticles(username, categoryId);
@@ -53,4 +52,27 @@ public class ArticleController {
             return Result.buildErrorResponse("500", e.getMessage(), version);
         }
     }
+
+    @PostMapping(value = "/article", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ApiOperation(value = "Create a new article and insert it into the database")
+    @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
+            @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
+    })
+    public Result<Integer> getUsers(@RequestBody @ApiParam(value = "A JSON value representing a article record.",
+            example = "{\"userId\":5,\"title\":\"Test Article #1\",\"description\":\"This is a test article\",\"body\":\"Test test test test test test.\",\"categoryId\":[1,3,5,7]}")
+                                                ArticleExt record) {
+        try {
+
+            int updated = service.insertArticle(record);
+
+            return Result.buildOkResponse(updated, version);
+        } catch (Exception e) {
+            logger.error("*** Unexpected Exception: e = {} ***", e);
+
+            return Result.buildErrorResponse("500", e.getMessage(), version);
+        }
+    }
+
+
 }

@@ -62,4 +62,10 @@
         </where>
         group by t1.id
     </select>
+
+    <insert id="insert" parameterType="edu.tamu.wumrwds.database.entity.Article" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into tt_article (user_id, title, description, body)
+        values (#{userId, jdbcType=INTEGER},#{title, jdbcType=VARCHAR},
+        #{description, jdbcType=VARCHAR},#{body, jdbcType=LONGVARBINARY})
+    </insert>
 </mapper>

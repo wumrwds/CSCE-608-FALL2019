@@ -5,4 +5,6 @@ import edu.tamu.wumrwds.database.entity.ext.ArticleExt;
 
 public interface ArticleService {
     PageInfo<ArticleExt> selectArticles(String username, Integer categoryId);
+
+    int insertArticle(ArticleExt record);
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import edu.tamu.wumrwds.database.entity.Article;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Article extended class.
@@ -21,6 +22,8 @@ public class ArticleExt extends Article implements Serializable {
 
     private String categoryName;
 
+    private List<Integer> categoryId;
+
     public String getUsername() {
         return username;
     }
@@ -37,11 +40,20 @@ public class ArticleExt extends Article implements Serializable {
         this.categoryName = categoryName;
     }
 
+    public List<Integer> getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(List<Integer> categoryId) {
+        this.categoryId = categoryId;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " ArticleExt{" +
                 "username='" + username + '\'' +
                 ", categoryName='" + categoryName + '\'' +
+                ", categoryId='" + categoryId + '\'' +
                 '}';
     }
 }
