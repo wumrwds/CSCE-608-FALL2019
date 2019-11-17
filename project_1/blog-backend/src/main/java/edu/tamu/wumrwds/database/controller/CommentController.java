@@ -33,7 +33,7 @@ public class CommentController {
     @Value("${project.version}")
     private String version;
 
-    @GetMapping(value = "/comment", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ApiOperation(value = "Retrieves comments by querying with specific keywords")
     @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),

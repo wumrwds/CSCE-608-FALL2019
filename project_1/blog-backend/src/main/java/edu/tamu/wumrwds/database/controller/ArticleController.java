@@ -31,7 +31,7 @@ public class ArticleController {
     @Value("${project.version}")
     private String version;
 
-    @GetMapping(value = "/article", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ApiOperation(value = "Retrieves articles by querying with specific keywords")
     @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
@@ -53,7 +53,7 @@ public class ArticleController {
         }
     }
 
-    @PostMapping(value = "/article", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ApiOperation(value = "Create a new article and insert it into the database")
     @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
