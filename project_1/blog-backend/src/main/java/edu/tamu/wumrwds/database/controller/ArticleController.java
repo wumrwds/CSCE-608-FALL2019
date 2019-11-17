@@ -23,7 +23,7 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
 @Api(tags = "Article API")
 public class ArticleController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
     @Autowired
     private ArticleService service;
