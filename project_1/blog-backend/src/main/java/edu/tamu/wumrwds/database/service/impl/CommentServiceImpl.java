@@ -2,6 +2,7 @@ package edu.tamu.wumrwds.database.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import edu.tamu.wumrwds.database.entity.Comment;
 import edu.tamu.wumrwds.database.entity.dto.CommentDTO;
 import edu.tamu.wumrwds.database.entity.ext.CommentExt;
 import edu.tamu.wumrwds.database.mapper.CommentMapper;
@@ -39,5 +40,15 @@ public class CommentServiceImpl implements CommentService {
         List<CommentDTO> counts = mapper.selectCountByArticle(articleId);
 
         return new PageInfo<>(counts);
+    }
+
+    @Override
+    public int insertComment(Comment record) {
+        int updated = mapper.insert(record);
+        if (updated == 0) {
+            throw new RuntimeException("Can not insert comment record into database.");
+        }
+
+        return updated;
     }
 }

@@ -55,6 +55,27 @@ public class CommentController {
         }
     }
 
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ApiOperation(value = "Create a new comment on the selected article")
+    @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
+            @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
+    })
+    public Result<Integer> getUsers(@RequestBody @ApiParam(value = "A JSON value representing a comment record.",
+            example = "{\"userId\":0,\"username\":\"rlskkcrkxwolplnvctbh\",\"articleId\":3004,\"content\":\"test content #1\"}")
+                                            Comment record) {
+        try {
+
+            int updated = service.insertComment(record);
+
+            return Result.buildOkResponse(updated, version);
+        } catch (Exception e) {
+            logger.error("*** Unexpected Exception: e = {} ***", e);
+
+            return Result.buildErrorResponse("500", e.getMessage(), version);
+        }
+    }
+
     @GetMapping(value = "/count", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ApiOperation(value = "Count comments by the specific keyword")

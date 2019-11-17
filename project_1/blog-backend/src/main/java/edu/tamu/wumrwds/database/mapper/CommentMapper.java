@@ -28,4 +28,12 @@ public interface CommentMapper {
     List<CommentExt> selectComments(String username, Long articleId);
 
     List<CommentDTO> selectCountByArticle(Long articleId);
+
+    /**
+     * Inserts a given record.
+     *
+     * @param record
+     * @return
+     */
+    int insert(Comment record);
 }
