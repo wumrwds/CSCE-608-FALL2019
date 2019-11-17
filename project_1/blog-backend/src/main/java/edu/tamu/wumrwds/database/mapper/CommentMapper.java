@@ -1,6 +1,7 @@
 package edu.tamu.wumrwds.database.mapper;
 
 import edu.tamu.wumrwds.database.entity.Comment;
+import edu.tamu.wumrwds.database.entity.ext.CommentExt;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface CommentMapper {
      * @mbg.generated
      */
     List<Comment> selectAll();
+
+    List<CommentExt> selectComments(String username, Long articleId);
 }

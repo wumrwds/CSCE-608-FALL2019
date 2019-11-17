@@ -1,5 +1,7 @@
 package edu.tamu.wumrwds.database.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,8 @@ public class Comment implements Serializable {
      * @mbg.generated
      */
     private Long id;
+
+    private Integer userId;
 
     /**
      *
@@ -47,6 +51,7 @@ public class Comment implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createdTime;
 
     /**
@@ -79,6 +84,14 @@ public class Comment implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     /**
@@ -190,6 +203,7 @@ public class Comment implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", userId=").append(userId);
         sb.append(", username=").append(username);
         sb.append(", articleId=").append(articleId);
         sb.append(", content=").append(content);
