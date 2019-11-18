@@ -59,7 +59,7 @@ public class ArticleController {
     @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
             @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
     })
-    public Result<Integer> getUsers(@RequestBody @ApiParam(value = "A JSON value representing a article record.",
+    public Result<Integer> createArticle(@RequestBody @ApiParam(value = "A JSON value representing a article record.",
             example = "{\"userId\":5,\"title\":\"Test Article #1\",\"description\":\"This is a test article\",\"body\":\"Test test test test test test.\",\"categoryId\":[1,3,5,7]}")
                                                 ArticleExt record) {
         try {
@@ -74,5 +74,28 @@ public class ArticleController {
         }
     }
 
+    @DeleteMapping(value = "/most-commented", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ApiOperation(value = "Delete the most commented article")
+    @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
+            @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
+    })
+    public Result<Integer> deleteMostCommented() {
 
+        try {
+
+            int deleted = service.deleteMostCommented();
+
+            return Result.buildOkResponse(deleted, version);
+        } catch (IllegalStateException e){
+            logger.error("*** No more tuples can be deleted: e = {} ***", e);
+
+            return Result.buildErrorResponse("400", e.getMessage(), version);
+        }
+        catch (Exception e) {
+            logger.error("*** Unexpected Exception: e = {} ***", e);
+
+            return Result.buildErrorResponse("500", e.getMessage(), version);
+        }
+    }
 }

@@ -7,4 +7,6 @@ public interface ArticleService {
     PageInfo<ArticleExt> selectArticles(String username, Integer categoryId);
 
     int insertArticle(ArticleExt record);
+
+    int deleteMostCommented();
 }

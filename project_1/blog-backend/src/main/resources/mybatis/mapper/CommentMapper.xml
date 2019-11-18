@@ -78,4 +78,9 @@
         values (#{userId, jdbcType=INTEGER},#{username, jdbcType=VARCHAR},
         #{articleId, jdbcType=BIGINT},#{content, jdbcType=VARCHAR})
     </insert>
+
+    <delete id="deleteByArticleId" parameterType="java.lang.Long">
+        DELETE from tt_comment
+        where article_id = #{articleId, jdbcType=BIGINT}
+    </delete>
 </mapper>

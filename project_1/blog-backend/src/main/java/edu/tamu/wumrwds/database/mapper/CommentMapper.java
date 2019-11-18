@@ -36,4 +36,13 @@ public interface CommentMapper {
      * @return
      */
     int insert(Comment record);
+
+    /**
+     * Deletes comments by article ID.
+     *
+     * @param articleId
+     * @return
+     */
+    int deleteByArticleId(Long articleId);
+
 }

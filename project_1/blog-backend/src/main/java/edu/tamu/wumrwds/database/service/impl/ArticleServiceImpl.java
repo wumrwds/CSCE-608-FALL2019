@@ -6,6 +6,7 @@ import edu.tamu.wumrwds.database.entity.ArticleToCategory;
 import edu.tamu.wumrwds.database.entity.ext.ArticleExt;
 import edu.tamu.wumrwds.database.mapper.ArticleMapper;
 import edu.tamu.wumrwds.database.mapper.ArticleToCategoryMapper;
+import edu.tamu.wumrwds.database.mapper.CommentMapper;
 import edu.tamu.wumrwds.database.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleToCategoryMapper articleToCategoryMapper;
+
+    @Autowired
+    private CommentMapper commentMapper;
 
 
     @Override
@@ -56,5 +60,24 @@ public class ArticleServiceImpl implements ArticleService {
         int updatedRows2 = articleToCategoryMapper.insertAll(links);
 
         return Math.min(updatedRows1, updatedRows2);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public int deleteMostCommented() {
+        // retrieve the most commented article (top 1)
+        Long articleId = articleMapper.selectMostCommented();
+
+        if (articleId == null) {
+            throw new IllegalStateException("No article can be deleted.");
+        }
+
+        // delete article
+        int deleted1 = articleMapper.delete(articleId);
+
+        // delete related comments
+        commentMapper.deleteByArticleId(articleId);
+
+        return deleted1;
     }
 }

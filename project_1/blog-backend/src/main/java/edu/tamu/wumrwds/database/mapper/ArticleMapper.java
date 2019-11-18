@@ -41,4 +41,19 @@ public interface ArticleMapper {
      * @return
      */
     int insert(Article record);
+
+    /**
+     * Selects the most commented article.
+     *
+     * @return
+     */
+    Long selectMostCommented();
+
+    /**
+     * Deletes article by id.
+     *
+     * @param id
+     * @return
+     */
+    int delete(Long id);
 }

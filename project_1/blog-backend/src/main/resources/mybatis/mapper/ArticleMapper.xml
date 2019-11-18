@@ -14,12 +14,12 @@
         <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime"/>
         <result column="body" jdbcType="LONGVARBINARY" property="body"/>
     </resultMap>
-    
+
     <resultMap id="BaseResultMapExt" type="edu.tamu.wumrwds.database.entity.ext.ArticleExt" extends="BaseResultMap">
-        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
     </resultMap>
-    
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         <!--
           WARNING - @mbg.generated
@@ -41,8 +41,8 @@
 
     <select id="selectArticles" resultMap="BaseResultMapExt">
         select t1.id, t1.user_id, t2.username, t1.title,
-            GROUP_CONCAT(t4.name) as category_name,
-            t1.description, t1.body, t1.created_time, t1.updated_time
+        GROUP_CONCAT(t4.name) as category_name,
+        t1.description, t1.body, t1.created_time, t1.updated_time
         from
         tt_article t1
         LEFT OUTER JOIN tt_user t2
@@ -53,7 +53,7 @@
         ON t3.category_id = t4.id
         <where>
             <if test="username != null and username != ''">
-                <bind name="username" value="'%' + username + '%'" />
+                <bind name="username" value="'%' + username + '%'"/>
                 and t2.username like #{username, jdbcType=VARCHAR}
             </if>
             <if test="categoryId != null">
@@ -64,9 +64,25 @@
         order by t1.updated_time desc
     </select>
 
-    <insert id="insert" parameterType="edu.tamu.wumrwds.database.entity.Article" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="insert" parameterType="edu.tamu.wumrwds.database.entity.Article" useGeneratedKeys="true"
+            keyProperty="id" keyColumn="id">
         insert into tt_article (user_id, title, description, body)
         values (#{userId, jdbcType=INTEGER},#{title, jdbcType=VARCHAR},
         #{description, jdbcType=VARCHAR},#{body, jdbcType=LONGVARBINARY})
     </insert>
+
+    <select id="selectMostCommented" resultType="java.lang.Long">
+        select article_id from (
+            select article_id, count(1) as `count`
+            from tt_comment
+            group by article_id
+            order by count desc
+            limit 1
+        ) t
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE from tt_article
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>
