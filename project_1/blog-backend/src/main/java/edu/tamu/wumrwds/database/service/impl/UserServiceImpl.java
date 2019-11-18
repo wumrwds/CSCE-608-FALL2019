@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * User service implementation.
  *
+ * @author wumrwds
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,9 +21,9 @@ public class UserServiceImpl implements UserService {
     private UserMapper mapper;
 
     @Override
-    public PageInfo<UserExt> selectUsers(String username, Integer roleId) {
+    public PageInfo<UserExt> selectUsers(String username, Integer roleId, int pageNum, int pageSize) {
 
-        PageHelper.startPage(1, 10);
+        PageHelper.startPage(pageNum, pageSize);
 
         List<UserExt> users = mapper.selectUsers(username, roleId);
 

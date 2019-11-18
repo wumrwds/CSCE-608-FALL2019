@@ -40,10 +40,14 @@ public class ArticleController {
     public Result<PageInfo<? extends Article>> getArticle(@RequestParam(name = "username", required = false)
                                                               @ApiParam(value = "User name") String username,
                                                         @RequestParam(name = "category_id", required = false)
-                                                        @ApiParam(value = "category ID") Integer categoryId) {
+                                                        @ApiParam(value = "category ID") Integer categoryId,
+                                                        @RequestParam(name = "page", defaultValue = "1", required = false)
+                                                        @ApiParam("page number") int pageNum,
+                                                        @RequestParam(name = "size", defaultValue = "10", required = false)
+                                                        @ApiParam("page size") int pageSize) {
 
         try {
-            PageInfo<ArticleExt> articles = service.selectArticles(username, categoryId);
+            PageInfo<ArticleExt> articles = service.selectArticles(username, categoryId, pageNum, pageSize);
 
             return Result.buildOkResponse(articles, version);
         } catch (Exception e) {

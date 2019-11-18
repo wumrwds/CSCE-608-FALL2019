@@ -33,9 +33,9 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
-    public PageInfo<ArticleExt> selectArticles(String username, Integer categoryId) {
+    public PageInfo<ArticleExt> selectArticles(String username, Integer categoryId, int pageNum, int pageSize) {
 
-        PageHelper.startPage(1, 10);
+        PageHelper.startPage(pageNum, pageSize);
 
         List<ArticleExt> articles = articleMapper.selectArticles(username, categoryId);
 

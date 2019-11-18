@@ -6,10 +6,7 @@ import edu.tamu.wumrwds.database.entity.User;
 import edu.tamu.wumrwds.database.entity.ext.UserExt;
 import edu.tamu.wumrwds.database.entity.vo.Result;
 import edu.tamu.wumrwds.database.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +37,14 @@ public class UserController {
             @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
     })
     public Result<PageInfo<? extends User>> getUsers(@RequestParam(name = "username", required = false) String username,
-                                                        @RequestParam(name = "role_id", required = false) Integer roleId) {
+                                                        @RequestParam(name = "role_id", required = false) Integer roleId,
+                                                     @RequestParam(name = "page", defaultValue = "1", required = false)
+                                                         @ApiParam("page number") int pageNum,
+                                                     @RequestParam(name = "size", defaultValue = "10", required = false)
+                                                         @ApiParam("page size") int pageSize) {
 
         try {
-            PageInfo<UserExt> users = service.selectUsers(username, roleId);
+            PageInfo<UserExt> users = service.selectUsers(username, roleId, pageNum, pageSize);
 
             return Result.buildOkResponse(users, version);
         } catch (Exception e) {

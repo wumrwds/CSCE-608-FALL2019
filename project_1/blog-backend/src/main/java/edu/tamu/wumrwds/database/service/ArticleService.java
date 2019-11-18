@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import edu.tamu.wumrwds.database.entity.ext.ArticleExt;
 
 public interface ArticleService {
-    PageInfo<ArticleExt> selectArticles(String username, Integer categoryId);
+    PageInfo<ArticleExt> selectArticles(String username, Integer categoryId, int pageNum, int pageSize);
 
     int insertArticle(ArticleExt record);
 

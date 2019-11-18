@@ -19,8 +19,8 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper mapper;
 
     @Override
-    public PageInfo<CategoryDTO> selectAvgCommentCount() {
-        PageHelper.startPage(1, 10);
+    public PageInfo<CategoryDTO> selectAvgCommentCount(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
 
         List<CategoryDTO> avgCommentCounts = mapper.selectAvgCommentCount();
 

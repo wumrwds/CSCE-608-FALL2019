@@ -42,10 +42,14 @@ public class CommentController {
     public Result<PageInfo<? extends Comment>> getComments(@RequestParam(name = "username", required = false)
                                                             @ApiParam(value = "User name") String username,
                                                         @RequestParam(name = "article_id", required = false)
-                                                        @ApiParam(value = "Article ID") Long articleId) {
+                                                        @ApiParam(value = "Article ID") Long articleId,
+                                                        @RequestParam(name = "page", defaultValue = "1", required = false)
+                                                        @ApiParam("page number") int pageNum,
+                                                        @RequestParam(name = "size", defaultValue = "10", required = false)
+                                                        @ApiParam("page size") int pageSize) {
 
         try {
-            PageInfo<CommentExt> comments = service.selectComments(username, articleId);
+            PageInfo<CommentExt> comments = service.selectComments(username, articleId, pageNum, pageSize);
 
             return Result.buildOkResponse(comments, version);
         } catch (Exception e) {
@@ -83,10 +87,14 @@ public class CommentController {
             @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
     })
     public Result<PageInfo<CommentDTO>> getCount(@RequestParam(name = "article_id", required = false)
-                                                        @ApiParam(value = "Article ID") Long articleId) {
+                                                 @ApiParam(value = "Article ID") Long articleId,
+                                                 @RequestParam(name = "page", defaultValue = "1", required = false)
+                                                 @ApiParam("page number") int pageNum,
+                                                 @RequestParam(name = "size", defaultValue = "10", required = false)
+                                                 @ApiParam("page size") int pageSize) {
 
         try {
-            PageInfo<CommentDTO> count = service.selectCountByArticle(articleId);
+            PageInfo<CommentDTO> count = service.selectCountByArticle(articleId, pageNum, pageSize);
 
             return Result.buildOkResponse(count, version);
         } catch (Exception e) {

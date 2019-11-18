@@ -4,5 +4,5 @@ import com.github.pagehelper.PageInfo;
 import edu.tamu.wumrwds.database.entity.dto.CategoryDTO;
 
 public interface CategoryService {
-    PageInfo<CategoryDTO> selectAvgCommentCount();
+    PageInfo<CategoryDTO> selectAvgCommentCount(int pageNum, int pageSize);
 }

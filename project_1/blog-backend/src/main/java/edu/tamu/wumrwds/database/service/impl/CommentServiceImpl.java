@@ -23,9 +23,9 @@ public class CommentServiceImpl implements CommentService {
     private CommentMapper mapper;
 
     @Override
-    public PageInfo<CommentExt> selectComments(String username, Long articleId) {
+    public PageInfo<CommentExt> selectComments(String username, Long articleId, int pageNum, int pageSize) {
 
-        PageHelper.startPage(1, 10);
+        PageHelper.startPage(pageNum, pageSize);
 
         List<CommentExt> comments = mapper.selectComments(username, articleId);
 
@@ -33,9 +33,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public PageInfo<CommentDTO> selectCountByArticle(Long articleId) {
+    public PageInfo<CommentDTO> selectCountByArticle(Long articleId, int pageNum, int pageSize) {
 
-        PageHelper.startPage(1, 10);
+        PageHelper.startPage(pageNum, pageSize);
 
         List<CommentDTO> counts = mapper.selectCountByArticle(articleId);
 
