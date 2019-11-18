@@ -39,7 +39,7 @@ public class CommentController {
     @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
             @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
     })
-    public Result<PageInfo<? extends Comment>> getUsers(@RequestParam(name = "username", required = false)
+    public Result<PageInfo<? extends Comment>> getComments(@RequestParam(name = "username", required = false)
                                                             @ApiParam(value = "User name") String username,
                                                         @RequestParam(name = "article_id", required = false)
                                                         @ApiParam(value = "Article ID") Long articleId) {
@@ -61,7 +61,7 @@ public class CommentController {
     @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
             @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
     })
-    public Result<Integer> getUsers(@RequestBody @ApiParam(value = "A JSON value representing a comment record.",
+    public Result<Integer> createComment(@RequestBody @ApiParam(value = "A JSON value representing a comment record.",
             example = "{\"userId\":0,\"username\":\"rlskkcrkxwolplnvctbh\",\"articleId\":3004,\"content\":\"test content #1\"}")
                                             Comment record) {
         try {
