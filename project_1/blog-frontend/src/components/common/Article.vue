@@ -87,7 +87,6 @@
                             size="mini"
                             @click="queryJobProcess(scope.row.id)">view body</el-button>
                         </template>
-                        
                     </el-table-column>
                     <el-table-column
                         align="center"
