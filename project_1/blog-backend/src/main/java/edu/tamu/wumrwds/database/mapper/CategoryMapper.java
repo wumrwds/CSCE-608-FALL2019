@@ -1,6 +1,7 @@
 package edu.tamu.wumrwds.database.mapper;
 
 import edu.tamu.wumrwds.database.entity.Category;
+import edu.tamu.wumrwds.database.entity.dto.CategoryDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface CategoryMapper {
      * @mbg.generated
      */
     List<Category> selectAll();
+
+    List<CategoryDTO> selectAvgCommentCount();
 }
