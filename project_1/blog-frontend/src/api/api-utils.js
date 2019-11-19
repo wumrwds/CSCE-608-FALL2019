@@ -1,5 +1,9 @@
 import apiPath from './api-path'
 
+const getUsers = (vm, option) => {
+    return vm.$http.get(apiPath.userContext, {params: option})
+}
+
 const getTasks = (vm, option) => {
     return vm.$http.get(apiPath.taskContext, {params: option})
 }
@@ -17,6 +21,7 @@ const getErrorLogs = (vm, jobId, option) => {
 }
 
 const utils = {
+    getUsers,
     getTasks,
     getJobs,
     getJobProcess,

@@ -13,9 +13,9 @@ module.exports = merge(common, {
         open: true,
         compress: true,
         proxy: {
-            '/idsp-predict': {
-                target: 'http://127.0.0.1:8888',
-                pathRewrite: { '^/idsp-predict': '/idsp-predict' }
+            '/': {
+                target: 'http://localhost:8888',
+                pathRewrite: { '^/': '/' }
             }
         }
     },

@@ -5,7 +5,7 @@
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item :to="{path:'/'}">Home</el-breadcrumb-item>
                     <el-breadcrumb-item>User</el-breadcrumb-item>
-                    <el-breadcrumb-item :to="{path:'/user'}">User List</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{path:'/user'}">Query Users</el-breadcrumb-item>
                 </el-breadcrumb>
                 <div class="title-section">
                     <div class="item-group">
@@ -16,27 +16,19 @@
                             clearable>
                         </el-input>
                     </div>
-                    <!-- <div class="item-group">
-                        <label>User Type</label>
-                        <el-select v-model="status" placeholder="please select">
+                    <div class="item-group">
+                        <label>Role Type</label>
+                        <el-select v-model="roleId" placeholder="please select">
                             <el-option
-                            v-for="item in statusOptions"
+                            v-for="item in roleOptions"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value">
                             </el-option>
                         </el-select>
-                    </div> -->
-                    <!-- <div class="item-group">
-                        <label>业务时间：</label>
-                        <el-input
-                            placeholder="请输入业务时间"
-                            v-model="businessTm"
-                            clearable>
-                        </el-input>
-                    </div> -->
+                    </div>
 
-                    <el-button type="primary" class="query-button" @click="queryJobs">Query</el-button>
+                    <el-button type="primary" class="query-button" @click="queryUsers">Query</el-button>
                     <!-- <el-button type="primary" class="add-button"><router-link to="/add">新增</router-link></el-button> -->
                 </div>
 
@@ -132,120 +124,24 @@ export default {
                 total: 1
             },
             username: '',
-            status: null,
+            roleId: null,
             show: false,
-            statusOptions: [
+            roleOptions: [
                 {
                     value: null,
-                    label: 'ALl'
+                    label: 'Any Role'
                 },
                 {
                     value: 0,
-                    label: 'A'
+                    label: 'Common User'
                 },
                 {
                     value: 1,
-                    label: 'B'
-                },
-                {
-                    value: 2,
-                    label: 'C'
-                },
-                {
-                    value: 3,
-                    label: 'D'
+                    label: 'Administrator'
                 }
             ],
             businessTm: '',
             tableData: [
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
                 {
                     id: "1",
                     username: "a",
@@ -285,7 +181,7 @@ export default {
             console.log(`每页 ${val} 条`)
         },
         handleCurrentChange (val) {
-            this.queryJobs()
+            this.queryUsers()
             console.log(`当前页: ${val}`)
         },
         handleEdit (index, row) {
@@ -296,7 +192,7 @@ export default {
             this.tableData.splice(index, 1)
         },
 
-        queryJobs () {
+        queryUsers () {
             let option = {
                 page: this.pageData.currentPage,
                 size: this.pageData.pageSize
@@ -306,20 +202,16 @@ export default {
                 option.username = this.username
             }
 
-            if (this.status !== null && this.status !== undefined) {
-                option.status = this.status
+            if (this.roleId !== null && this.roleId !== undefined) {
+                option.role_id = this.roleId
             }
 
-            if (this.businessTm !== null && this.businessTm !== undefined && this.businessTm.split(" ").join("").length !== 0) {
-                option.businessTm = this.businessTm
-            }
-
-            apiUtil.getJobs(this, option).then((res) => {
+            apiUtil.getUsers(this, option).then((res) => {
                 if (res.body.success === true) {
-                    this.pageData.total = res.body.obj.total
+                    this.pageData.total = res.body.result.total
 
                     // format data list
-                    this.tableData = res.body.obj.list
+                    this.tableData = res.body.result.list
                 } else {
                     this.$message.error(res.body.errorMessage)
                 }
@@ -352,7 +244,7 @@ export default {
             this.username = this.$route.params.username.toString()
         }
 
-        this.queryJobs()
+        this.queryUsers()
     }
 }
 </script>

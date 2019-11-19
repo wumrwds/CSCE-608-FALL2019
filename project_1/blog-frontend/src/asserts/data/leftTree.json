@@ -10,7 +10,7 @@
         "href": "/",
         "children": [
             {
-               "title": "User List",
+               "title": "Query Users",
                 "href": "/user"
             }
         ]
