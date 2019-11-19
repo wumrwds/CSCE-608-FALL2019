@@ -21,7 +21,7 @@
         "href": "/",
         "children": [
             {
-               "title": "Article List",
+               "title": "Query Articles",
                 "href": "/article"
             }
         ]

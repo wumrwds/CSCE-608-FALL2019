@@ -4,6 +4,10 @@ const getUsers = (vm, option) => {
     return vm.$http.get(apiPath.userContext, {params: option})
 }
 
+const getArticles = (vm, option) => {
+    return vm.$http.get(apiPath.articleContext, {params: option})
+}
+
 const getTasks = (vm, option) => {
     return vm.$http.get(apiPath.taskContext, {params: option})
 }
@@ -22,6 +26,7 @@ const getErrorLogs = (vm, jobId, option) => {
 
 const utils = {
     getUsers,
+    getArticles,
     getTasks,
     getJobs,
     getJobProcess,

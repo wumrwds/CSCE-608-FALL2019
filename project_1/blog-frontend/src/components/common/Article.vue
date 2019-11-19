@@ -5,11 +5,18 @@
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item :to="{path:'/'}">Home</el-breadcrumb-item>
                     <el-breadcrumb-item>Article</el-breadcrumb-item>
-                    <el-breadcrumb-item :to="{path:'/user'}">Article List</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{path:'/user'}">Query Articles</el-breadcrumb-item>
                 </el-breadcrumb>
                 <div class="title-section">
                     <div class="item-group">
                         <label>Username：</label>
+                        <!-- <el-autocomplete
+                        class="inline-input"
+                        v-model="state1"
+                        :fetch-suggestions="queryUsers"
+                        placeholder="请输入内容"
+                        @select="handleSelect">
+                        </el-autocomplete> -->
                         <el-input
                             placeholder="please input the username"
                             v-model="username"
@@ -17,34 +24,18 @@
                         </el-input>
                     </div>
                     <div class="item-group">
-                        <label>Category:</label>
-                        <el-input
-                            placeholder="please input the category"
-                            v-model="category"
-                            clearable>
-                        </el-input>
-                    </div>
-                    <!-- <div class="item-group">
-                        <label>User Type</label>
-                        <el-select v-model="status" placeholder="please select">
+                        <label>Category ID:</label>
+                        <el-select v-model="Id" placeholder="please select the category">
                             <el-option
-                            v-for="item in statusOptions"
+                            v-for="item in categoryOptions"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value">
                             </el-option>
                         </el-select>
-                    </div> -->
-                    <!-- <div class="item-group">
-                        <label>业务时间：</label>
-                        <el-input
-                            placeholder="请输入业务时间"
-                            v-model="businessTm"
-                            clearable>
-                        </el-input>
-                    </div> -->
+                    </div>
 
-                    <el-button type="primary" class="query-button" @click="queryJobs">Query</el-button>
+                    <el-button type="primary" class="query-button" @click="queryArticles">Query</el-button>
                     <!-- <el-button type="primary" class="add-button"><router-link to="/add">新增</router-link></el-button> -->
                 </div>
 
@@ -56,17 +47,18 @@
                     <el-table-column
                         align="center"
                         prop="id"
+                        min-width="60"
                         label="Article ID">
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        min-width="100"
+                        min-width="80"
                         prop="username"
                         label="Username">
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        min-width="100"
+                        min-width="80"
                         prop="title"
                         label="Title">
                     </el-table-column>
@@ -78,32 +70,35 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        min-width="200"
+                        min-width="400"
                         prop="body"
                         label="body">
-
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        min-width="120"
+                        prop="categoryName"
+                        label="categoryName">
                         <template slot-scope="scope">
-                        <el-button
-                            size="mini"
-                            @click="queryJobProcess(scope.row.id)">view body</el-button>
+                            {{scope.row.categoryName | nullToDash}}
                         </template>
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        min-width="150"
+                        min-width="78"
                         prop="createdTime"
                         label="createdTime">
                         <template slot-scope="scope">
-                            {{scope.row.startTime | longToDateTime}}
+                            {{scope.row.createdTime | longToDateTime}}
                         </template>
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        min-width="150"
+                        min-width="78"
                         prop="updatedTime"
                         label="updatedTime">
                         <template slot-scope="scope">
-                            {{scope.row.finishTime | longToDateTime}}
+                            {{scope.row.updatedTime | longToDateTime}}
                         </template>
                     </el-table-column>
                 </el-table>
@@ -152,128 +147,34 @@ export default {
                 total: 1
             },
             username: '',
-            status: null,
-            show: false,
-            statusOptions: [
+            categoryId: '',
+            categoryOptions: [
                 {
                     value: null,
-                    label: 'ALl'
+                    label: 'Any Category'
                 },
                 {
                     value: 0,
-                    label: 'A'
+                    label: 'Common User'
                 },
                 {
                     value: 1,
-                    label: 'B'
-                },
-                {
-                    value: 2,
-                    label: 'C'
-                },
-                {
-                    value: 3,
-                    label: 'D'
+                    label: 'Administrator'
                 }
             ],
+            show: false,
             businessTm: '',
             tableData: [
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                }
+                // {
+                //     id: "1",
+                //     username: "a",
+                //     title: "test",
+                //     description: "asdasdasdas",
+                //     body: "asd",
+                //     categoryName: "vxcvsdfb",
+                //     createdTime: "2019-11-10 00:10:38",
+                //     updatedTime: "2019-11-12 07:46:54"
+                // }
             ],
             processTableVisible: false,
             processData: []
@@ -305,7 +206,7 @@ export default {
             console.log(`每页 ${val} 条`)
         },
         handleCurrentChange (val) {
-            this.queryJobs()
+            this.queryArticles()
             console.log(`当前页: ${val}`)
         },
         handleEdit (index, row) {
@@ -316,7 +217,7 @@ export default {
             this.tableData.splice(index, 1)
         },
 
-        queryJobs () {
+        queryArticles () {
             let option = {
                 page: this.pageData.currentPage,
                 size: this.pageData.pageSize
@@ -326,20 +227,16 @@ export default {
                 option.username = this.username
             }
 
-            if (this.status !== null && this.status !== undefined) {
-                option.status = this.status
+            if (this.categoryId !== null && this.categoryId !== undefined) {
+                option.categoryId = this.categoryId
             }
 
-            if (this.businessTm !== null && this.businessTm !== undefined && this.businessTm.split(" ").join("").length !== 0) {
-                option.businessTm = this.businessTm
-            }
-
-            apiUtil.getJobs(this, option).then((res) => {
+            apiUtil.getArticles(this, option).then((res) => {
                 if (res.body.success === true) {
-                    this.pageData.total = res.body.obj.total
+                    this.pageData.total = res.body.result.total
 
                     // format data list
-                    this.tableData = res.body.obj.list
+                    this.tableData = res.body.result.list
                 } else {
                     this.$message.error(res.body.errorMessage)
                 }
@@ -348,22 +245,14 @@ export default {
             })
         },
 
-        queryJobProcess (jobId) {
-            this.processTableVisible = true
-
-            apiUtil.getJobProcess(this, jobId).then((res) => {
-                if (res.body.success === true) {
-                    this.processData = [res.body.obj]
-                } else {
-                    this.$message.error(res.body.errorMessage)
-                }
-            }, (err) => {
-                this.$message.error(err.body.errorMessage)
-            })
+        createFilter (queryString) {
+            return (user) => {
+                return (user.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+            }
         },
 
-        queryErrorLogsByJob (jobId) {
-            this.$router.push({name: 'errors', params: {jobId: jobId}})
+        handleSelect (item) {
+            console.log(item)
         }
     },
 
@@ -372,7 +261,7 @@ export default {
             this.username = this.$route.params.username.toString()
         }
 
-        this.queryJobs()
+        this.queryArticles()
     }
 }
 </script>
