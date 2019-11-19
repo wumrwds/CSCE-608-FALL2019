@@ -81,6 +81,14 @@
         ) t
     </select>
 
+    <select id="selectIdByTitle" resultMap="BaseResultMap">
+        select id, title
+        from tt_article
+        where
+        <bind name="title" value="'%' + title + '%'"/>
+        title like #{title, jdbcType=VARCHAR}
+    </select>
+
     <delete id="delete" parameterType="java.lang.Long">
         DELETE from tt_article
         where id = #{id,jdbcType=BIGINT}

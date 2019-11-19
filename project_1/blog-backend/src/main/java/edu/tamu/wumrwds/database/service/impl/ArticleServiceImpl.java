@@ -2,6 +2,7 @@ package edu.tamu.wumrwds.database.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import edu.tamu.wumrwds.database.entity.Article;
 import edu.tamu.wumrwds.database.entity.ArticleToCategory;
 import edu.tamu.wumrwds.database.entity.ext.ArticleExt;
 import edu.tamu.wumrwds.database.mapper.ArticleMapper;
@@ -79,5 +80,10 @@ public class ArticleServiceImpl implements ArticleService {
         commentMapper.deleteByArticleId(articleId);
 
         return deleted1;
+    }
+
+    @Override
+    public List<Article> selectIdByTitle(String title) {
+        return articleMapper.selectIdByTitle(title);
     }
 }

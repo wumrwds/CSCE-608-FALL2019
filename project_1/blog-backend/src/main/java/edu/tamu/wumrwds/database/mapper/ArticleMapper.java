@@ -35,6 +35,14 @@ public interface ArticleMapper {
     List<ArticleExt> selectArticles(String username, Integer categoryId);
 
     /**
+     * Selects article ID by title.
+     *
+     * @param title
+     * @return
+     */
+    List<Article> selectIdByTitle(String title);
+
+    /**
      * Inserts a given record.
      *
      * @param record

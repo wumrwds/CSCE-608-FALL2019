@@ -1,6 +1,7 @@
 package edu.tamu.wumrwds.database.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.tamu.wumrwds.database.serializer.ByteArrayDeserializer;
@@ -9,6 +10,9 @@ import edu.tamu.wumrwds.database.serializer.ByteArraySerializer;
 import java.io.Serializable;
 import java.util.Date;
 
+@JsonInclude(
+        JsonInclude.Include.NON_NULL
+)
 public class Article implements Serializable {
     /**
      *

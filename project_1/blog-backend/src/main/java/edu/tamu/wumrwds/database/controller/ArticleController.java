@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 
@@ -97,6 +99,26 @@ public class ArticleController {
             return Result.buildErrorResponse("400", e.getMessage(), version);
         }
         catch (Exception e) {
+            logger.error("*** Unexpected Exception: e = {} ***", e);
+
+            return Result.buildErrorResponse("500", e.getMessage(), version);
+        }
+    }
+
+    @GetMapping(value = "id", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ApiOperation(value = "Retrieves article id by querying with specific title")
+    @ApiResponses(value = { @ApiResponse(code = SC_OK, message = "ok"),
+            @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "An unexpected error occurred")
+    })
+    public Result<List<Article>> getArticleIdByTitle(@RequestParam(name = "title")
+                                                          @ApiParam(value = "Article title") String title) {
+
+        try {
+            List<Article> idTitlePairs = service.selectIdByTitle(title);
+
+            return Result.buildOkResponse(idTitlePairs, version);
+        } catch (Exception e) {
             logger.error("*** Unexpected Exception: e = {} ***", e);
 
             return Result.buildErrorResponse("500", e.getMessage(), version);
