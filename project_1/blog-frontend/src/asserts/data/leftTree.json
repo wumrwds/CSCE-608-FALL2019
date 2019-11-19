@@ -43,7 +43,7 @@
         "href": "/",
         "children": [
             {
-               "title": "Comment List",
+               "title": "Query Comments",
                 "href": "/comment"
             }
         ]

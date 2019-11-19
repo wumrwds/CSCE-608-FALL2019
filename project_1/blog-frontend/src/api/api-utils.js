@@ -8,6 +8,14 @@ const getArticles = (vm, option) => {
     return vm.$http.get(apiPath.articleContext, {params: option})
 }
 
+const getArticleIdByTitle = (vm, option) => {
+    return vm.$http.get(`${apiPath.articleContext}/id`, {params: option})
+}
+
+const getComments = (vm, option) => {
+    return vm.$http.get(apiPath.commentContext, {params: option})
+}
+
 const getTasks = (vm, option) => {
     return vm.$http.get(apiPath.taskContext, {params: option})
 }
@@ -27,6 +35,8 @@ const getErrorLogs = (vm, jobId, option) => {
 const utils = {
     getUsers,
     getArticles,
+    getArticleIdByTitle,
+    getComments,
     getTasks,
     getJobs,
     getJobProcess,

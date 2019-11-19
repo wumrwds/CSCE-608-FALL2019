@@ -4,8 +4,8 @@
             <el-main>
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item :to="{path:'/'}">Home</el-breadcrumb-item>
-                    <el-breadcrumb-item>User</el-breadcrumb-item>
-                    <el-breadcrumb-item :to="{path:'/user'}">User List</el-breadcrumb-item>
+                    <el-breadcrumb-item>Comment</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{path:'/user'}">Query Comments</el-breadcrumb-item>
                 </el-breadcrumb>
                 <div class="title-section">
                     <div class="item-group">
@@ -16,27 +16,19 @@
                             clearable>
                         </el-input>
                     </div>
-                    <!-- <div class="item-group">
-                        <label>User Type</label>
-                        <el-select v-model="status" placeholder="please select">
+                    <div class="item-group">
+                        <label>Article Title</label>
+                        <el-select v-model="articleId" style="width: 300px" filterable clearable remote placeholder="please input the article title" :remote-method="queryArticleId" :loading="loading">
                             <el-option
-                            v-for="item in statusOptions"
+                            v-for="item in articleOptions"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value">
                             </el-option>
                         </el-select>
-                    </div> -->
-                    <!-- <div class="item-group">
-                        <label>业务时间：</label>
-                        <el-input
-                            placeholder="请输入业务时间"
-                            v-model="businessTm"
-                            clearable>
-                        </el-input>
-                    </div> -->
+                    </div>
 
-                    <el-button type="primary" class="query-button" @click="queryJobs">Query</el-button>
+                    <el-button type="primary" class="query-button" @click="queryComments">Query</el-button>
                     <!-- <el-button type="primary" class="add-button"><router-link to="/add">新增</router-link></el-button> -->
                 </div>
 
@@ -48,7 +40,7 @@
                     <el-table-column
                         align="center"
                         prop="id"
-                        label="User ID">
+                        label="Comment ID">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -58,27 +50,24 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        min-width="100"
-                        prop="nickname"
-                        label="Nickname">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        min-width="120"
-                        prop="email"
-                        label="email">
+                        min-width="150"
+                        prop="title"
+                        label="article title">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         min-width="250"
-                        prop="description"
-                        label="description">
+                        prop="content"
+                        label="content">
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        min-width="100"
-                        prop="avatar"
-                        label="avatar">
+                        min-width="120"
+                        prop="createdTime"
+                        label="createdTime">
+                        <template slot-scope="scope">
+                            {{scope.row.createdTime | longToDateTime}}
+                        </template>
                     </el-table-column>
                 </el-table>
                 <el-pagination class="pagination"
@@ -125,121 +114,34 @@ export default {
                 pageSize: 10,
                 total: 1
             },
+            loading: false,
             username: '',
-            status: null,
+            articleId: null,
             show: false,
-            statusOptions: [
-                {
-                    value: null,
-                    label: 'ALl'
-                },
-                {
-                    value: 0,
-                    label: 'A'
-                },
-                {
-                    value: 1,
-                    label: 'B'
-                },
-                {
-                    value: 2,
-                    label: 'C'
-                },
-                {
-                    value: 3,
-                    label: 'D'
-                }
+            articleOptions: [
+                // {
+                //     value: null,
+                //     label: 'ALl'
+                // },
+                // {
+                //     value: 0,
+                //     label: 'A'
+                // },
+                // {
+                //     value: 1,
+                //     label: 'B'
+                // },
+                // {
+                //     value: 2,
+                //     label: 'C'
+                // },
+                // {
+                //     value: 3,
+                //     label: 'D'
+                // }
             ],
             businessTm: '',
             tableData: [
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
-                {
-                    id: "1",
-                    username: "a",
-                    nickname: "a",
-                    email: "wumrwds@gmail.com",
-                    description: "asdasdasdas",
-                    avatar: "C:/asdasdsad.txt"
-                },
                 {
                     id: "1",
                     username: "a",
@@ -279,7 +181,7 @@ export default {
             console.log(`每页 ${val} 条`)
         },
         handleCurrentChange (val) {
-            this.queryJobs()
+            this.queryComments()
             console.log(`当前页: ${val}`)
         },
         handleEdit (index, row) {
@@ -290,7 +192,7 @@ export default {
             this.tableData.splice(index, 1)
         },
 
-        queryJobs () {
+        queryComments () {
             let option = {
                 page: this.pageData.currentPage,
                 size: this.pageData.pageSize
@@ -300,26 +202,54 @@ export default {
                 option.username = this.username
             }
 
-            if (this.status !== null && this.status !== undefined) {
-                option.status = this.status
+            if (this.articleId !== null && this.articleId !== undefined) {
+                option.article_id = this.articleId
             }
 
-            if (this.businessTm !== null && this.businessTm !== undefined && this.businessTm.split(" ").join("").length !== 0) {
-                option.businessTm = this.businessTm
-            }
-
-            apiUtil.getJobs(this, option).then((res) => {
+            apiUtil.getComments(this, option).then((res) => {
                 if (res.body.success === true) {
-                    this.pageData.total = res.body.obj.total
+                    this.pageData.total = res.body.result.total
 
                     // format data list
-                    this.tableData = res.body.obj.list
+                    this.tableData = res.body.result.list
                 } else {
                     this.$message.error(res.body.errorMessage)
                 }
             }, (err) => {
                 this.$message.error(err.body.errorMessage)
             })
+        },
+
+        queryArticleId (title) {
+            if (title !== '') {
+                this.loading = true
+                setTimeout(() => {
+                    this.loading = false
+
+                    let option = {
+                        title: title
+                    }
+
+                    apiUtil.getArticleIdByTitle(this, option).then((res) => {
+                        if (res.body.success === true) {
+                            this.articleOptions = res.body.result.map(item => {
+                                return { value: item.id, label: item.title }
+                            })
+                        } else {
+                            this.$message.error(res.body.errorMessage)
+                        }
+                    }, (err) => {
+                        this.$message.error(err.body.errorMessage)
+                    })
+
+                    // this.options = this.list.filter(item => {
+                    //     return item.label.toLowerCase()
+                    //         .indexOf(query.toLowerCase()) > -1
+                    // })
+                }, 200)
+            } else {
+                this.articleOptions = []
+            }
         },
 
         queryJobProcess (jobId) {
@@ -346,7 +276,7 @@ export default {
             this.username = this.$route.params.username.toString()
         }
 
-        this.queryJobs()
+        this.queryComments()
     }
 }
 </script>
