@@ -358,7 +358,7 @@ public class PC {
             pc.disk.setReadIdxToHead(joinedResultPath);
             while (pc.disk.hasNextBlock(joinedResultPath)) {
                 for (Object[] tuple : pc.disk.readBlock(joinedResultPath).getTuples()) {
-                    if (tuple[1] == selectedB) {
+                    if (tuple[1].equals(selectedB)) {
                         System.out.println(Arrays.toString(tuple));
                     }
                 }
